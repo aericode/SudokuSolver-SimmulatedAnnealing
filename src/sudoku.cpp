@@ -32,6 +32,20 @@ Sudoku::Sudoku(string tip_){
     }
 }
 
+Sudoku::Sudoku(Sudoku original){
+	cellCount = original.cellCount;
+	size      = original.size;
+	level     = original.level;
+
+	perfectScore = original.perfectScore;
+
+	puzzle = new Cell[cellCount];
+	for(int i = 0; i<cellCount; i++){
+		puzzle[i].value  = original[i].value;
+		puzzle[i].is_tip = original[i].is_tip;
+	}
+}
+
 int Sudoku::lineScore(int lineIndex){
 	int score = 0;
 	//todos os caracteres já vistos
@@ -145,7 +159,6 @@ void Sudoku::initCol(int index){
 	//pula o zero
 	for(int i=1; i < (size+1);i++){
 		if(!seen[i]){
-			cout<<"não vi "<<i<<endl;
 			randomPool.push_back(i);
 		}
 	}
@@ -163,5 +176,28 @@ void Sudoku::initCol(int index){
 		}
 	}
 
-	//delete[] col;
+	delete[] col;
+}
+
+void Sudoku::initSudoku(){
+	for(int i = 0;i < size; i++){
+		initCol(i);
+	}
+}
+
+vector<int> Sudoku::getSwappableCols(){
+	vector<int> swappableList;
+	Cell** current;
+	int count;
+	for(int i = 0;i < size; i++){//pega colunas
+		count = 0;
+		current = getColumn(i);
+		for(int j = 0; j < size; j++){//pega elementos das colunas
+			if(current[j]->is_tip)count++;
+		}
+
+		if(count < (size-1) ){
+			swappableList.push_back(i);
+		}
+	}
 }

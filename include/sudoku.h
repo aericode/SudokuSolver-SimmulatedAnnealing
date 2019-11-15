@@ -25,6 +25,7 @@ public:
 
 	Cell** getColumn(int);
 	void initCol(int);
+	void initSudoku();
 };
 
 #endif
