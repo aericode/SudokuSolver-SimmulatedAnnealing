@@ -32,7 +32,7 @@ Sudoku::Sudoku(string tip_){
     }
 }
 
-Sudoku::Sudoku(Sudoku original){
+Sudoku::Sudoku(const Sudoku& original){
 	cellCount = original.cellCount;
 	size      = original.size;
 	level     = original.level;
@@ -41,8 +41,8 @@ Sudoku::Sudoku(Sudoku original){
 
 	puzzle = new Cell[cellCount];
 	for(int i = 0; i<cellCount; i++){
-		puzzle[i].value  = original[i].value;
-		puzzle[i].is_tip = original[i].is_tip;
+		puzzle[i].value  = original.puzzle[i].value;
+		puzzle[i].is_tip = original.puzzle[i].is_tip;
 	}
 }
 
@@ -199,5 +199,40 @@ vector<int> Sudoku::getSwappableCols(){
 		if(count < (size-1) ){
 			swappableList.push_back(i);
 		}
+		delete [] current;
 	}
+
+	return swappableList;
+}
+
+void Sudoku::swapRandCells(int colIndex){
+	vector<int> swappableList;
+	Cell** current = getColumn(colIndex);
+	for(int i = 0; i < size; i++){//pega elementos das colunas
+		if(current[i]->is_tip){
+			swappableList.push_back(i);
+		}
+	}
+
+	int indexA;
+	int indexB;
+
+	int selected;
+
+	selected = rand()%swappableList.size();
+
+	indexA = swappableList[selected];
+
+	swappableList.erase(swappableList.begin() + selected);
+
+	selected = rand()%swappableList.size();
+
+	indexB = swappableList[selected];
+
+	int aux;
+
+	aux = current[indexA]->value;
+	current[indexA]->value = current[indexB]->value;
+	current[indexB]->value = aux;
+
 }

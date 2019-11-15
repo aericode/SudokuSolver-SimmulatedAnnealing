@@ -3,6 +3,7 @@
 
 
 #include "cell.h"
+#include <vector>
 #include <string>
 
 using namespace std;
@@ -18,6 +19,7 @@ public:
 
 	Sudoku();
 	Sudoku(string);
+	Sudoku(const Sudoku&);
 
 	int calcScore();
 	int lineScore(int);
@@ -26,6 +28,9 @@ public:
 	Cell** getColumn(int);
 	void initCol(int);
 	void initSudoku();
+
+	vector<int> getSwappableCols();
+	void swapRandCells(int);
 };
 
 #endif
