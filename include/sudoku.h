@@ -24,6 +24,7 @@ public:
 	int blockScore(int);
 
 	Cell** getColumn(int);
+	void initCol(int);
 };
 
 #endif

@@ -1,13 +1,16 @@
 #include "cell.h"
 
-Cell::Cell(){}
-
-Cell::Cell(int value_){
-	is_tip = (value_ == 0);
-	value  = value_; 
+Cell::Cell(){
+	is_tip = false;
 }
 
-void Cell::setValue(int value_){
-	is_tip = (value_ == 0);
+Cell::Cell(int value_){
 	value  = value_; 
+
+	if(value == 0){
+		is_tip = false;
+	}else{
+		is_tip = true;
+	}
+	
 }

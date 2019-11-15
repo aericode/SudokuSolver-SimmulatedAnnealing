@@ -3,17 +3,46 @@
 #include <string>
 #include <iostream>
 
+#include <stdlib.h>     /* srand, rand */
+#include <time.h>  
+
 using namespace std;
 
 int main(){
-	Sudoku test("1111222233334444");
+	srand(time(NULL));
+
+	Sudoku test("0111122203330444");
 	//cout<<test.calcScore()<<endl;
-	Cell** col = test.getColumn(0);
+	Cell** col;
 	cout<<test.cellCount<<endl;
 	cout<<test.size<<endl;
 	cout<<test.level<<endl;
 
-	for(int i=0;i<4;i++){
-		cout<<col[0]->value<<endl;
+	/*
+	for(int i=0;i<16;i++){
+		cout<<test.puzzle[i].value;
+		if(test.puzzle[i].is_tip)cout<<" - é dica";
+
+		cout<<endl;
 	}
+	*/
+	
+
+	col = test.getColumn(0);
+	for(int i=0;i<4;i++){
+		cout<<col[i]->value;
+		if(col[i]->is_tip)cout<<" - é dica";
+
+		cout<<endl;
+	}
+	cout<<endl;
+	test.initCol(0);
+	col = test.getColumn(0);
+	for(int i=0;i<4;i++){
+		cout<<col[i]->value;
+		if(col[i]->is_tip)cout<<" - é dica";
+
+		cout<<endl;
+	}
+	
 }

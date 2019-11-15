@@ -1,7 +1,9 @@
 #include "cell.h"
 #include "sudoku.h"
 #include <string>
-#include <math.h>  
+#include <math.h>
+#include <vector>
+#include <iostream>
 
 
 using namespace std;
@@ -24,7 +26,9 @@ Sudoku::Sudoku(string tip_){
 	int currentValue;
 	for (int i = 0; i<cellCount; i++) { 
     	currentValue = tip_[i] - 48;
-    	puzzle[i].setValue(currentValue);
+    	puzzle[i].value  = currentValue;
+    	
+    	puzzle[i].is_tip = (currentValue != 0);
     }
 }
 
@@ -123,4 +127,41 @@ Cell** Sudoku::getColumn(int index){
 		col[i] = &puzzle[current];
 	}
 	return col;
+}
+
+//inicia uma coluna sem numeros repetidos
+void Sudoku::initCol(int index){
+	Cell** col = getColumn(index);
+
+	vector<int> randomPool;
+	bool* seen = new bool[size+1];
+	int seenIndex;
+	for (int i = 0; i < size; i++){
+		seenIndex = col[i]->value;
+		seen[seenIndex] = true;
+	}
+
+	//só numeros que nao foram dados como dica na coluna podem ser adicionados
+	//pula o zero
+	for(int i=1; i < (size+1);i++){
+		if(!seen[i]){
+			cout<<"não vi "<<i<<endl;
+			randomPool.push_back(i);
+		}
+	}
+
+	//selected from pool index, adds to col then removes from pool
+	int poolIndex;
+	for(int i = 0; i < size; i++){
+		if(col[i]->value == 0){
+			//pega um valor entre os restantes e atribui ao elemento
+			poolIndex = rand() % randomPool.size();
+			//pega o valor e coloca na coluna
+			col[i]->value = randomPool[poolIndex];
+			//remove o valor da pool
+			randomPool.erase(randomPool.begin() + poolIndex);
+		}
+	}
+
+	//delete[] col;
 }
