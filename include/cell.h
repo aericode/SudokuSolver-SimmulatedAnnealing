@@ -3,6 +3,7 @@
 
 class Cell{
 public:
+	int index;
 	int value;
 	bool is_tip;
 
