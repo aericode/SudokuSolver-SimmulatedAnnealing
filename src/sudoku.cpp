@@ -1,6 +1,7 @@
 #include "cell.h"
 #include "sudoku.h"
 #include <string>
+#include <math.h>  
 
 
 using namespace std;
@@ -9,10 +10,18 @@ using namespace std;
 Sudoku::Sudoku(){}
 
 Sudoku::Sudoku(string tip_){
-	int cellCount = tip_.size();
+	cellCount = tip_.size();
 	puzzle = new Cell[cellCount];
-	int currentValue;
 
+	size  = sqrt(cellCount);
+	level = sqrt(size);
+
+	//melhor nota para linha = size
+	//nº linhas = size
+	//mesma coisa para blocos
+	int perfectScore = 2*size*size;
+
+	int currentValue;
 	for (int i = 0; i<cellCount; i++) { 
     	currentValue = tip_[i] - 48;
     	puzzle[i].setValue(currentValue);
@@ -90,4 +99,28 @@ int Sudoku::blockScore(int index){
 
 	return score;
 
+}
+
+int Sudoku::calcScore(){
+	int score = 0;
+	for(int i=0;i<size;i++){
+		score += lineScore(i);
+	}
+
+	for(int i=0;i<size;i++){
+		score += blockScore(i);
+	}
+
+	return score;
+}
+
+Cell** Sudoku::getColumn(int index){
+	int current;
+	Cell** col = new Cell*[size];
+	for (int i=0;i<size;i++){
+		//offset to get a collumn
+		current = index + i*size;
+		col[i] = &puzzle[current];
+	}
+	return col;
 }
