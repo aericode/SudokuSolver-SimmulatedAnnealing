@@ -21,6 +21,8 @@ public:
 	Sudoku(string);
 	Sudoku(const Sudoku&);
 
+	~Sudoku();
+
 	int calcScore();
 	int lineScore(int);
 	int blockScore(int);
@@ -31,6 +33,8 @@ public:
 
 	vector<int> getSwappableCols();
 	void swapRandCells(int);
+
+	void printPuzzle();
 };
 
 #endif

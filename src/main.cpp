@@ -11,7 +11,8 @@ using namespace std;
 int main(){
 	srand(time(NULL));
 
-	Sudoku test("0111122203330444");
+	Sudoku orig("0111122203330444");
+	Sudoku test(orig);
 	//cout<<test.calcScore()<<endl;
 	Cell** col;
 	cout<<test.cellCount<<endl;
@@ -27,7 +28,7 @@ int main(){
 	}
 	*/
 	
-
+	/*
 	col = test.getColumn(0);
 	for(int i=0;i<4;i++){
 		cout<<col[i]->value;
@@ -51,4 +52,9 @@ int main(){
 
 		cout<<endl;
 	}
+	*/
+	test.printPuzzle();
+	test.initCol(0);
+	test.printPuzzle();
+
 }

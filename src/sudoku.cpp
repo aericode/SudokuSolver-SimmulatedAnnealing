@@ -11,6 +11,10 @@ using namespace std;
 
 Sudoku::Sudoku(){}
 
+Sudoku::~Sudoku(){
+	delete[] puzzle;
+}
+
 Sudoku::Sudoku(string tip_){
 	cellCount = tip_.size();
 	puzzle = new Cell[cellCount];
@@ -119,6 +123,7 @@ int Sudoku::blockScore(int index){
 
 }
 
+//dá uma nota para o estado atual (valoriza variedade de dígitos)
 int Sudoku::calcScore(){
 	int score = 0;
 	for(int i=0;i<size;i++){
@@ -132,6 +137,7 @@ int Sudoku::calcScore(){
 	return score;
 }
 
+//pega um array de ponteiros para elementos de uma mesma coluna (indexada no argumento)
 Cell** Sudoku::getColumn(int index){
 	int current;
 	Cell** col = new Cell*[size];
@@ -222,7 +228,7 @@ void Sudoku::swapRandCells(int colIndex){
 	selected = rand()%swappableList.size();
 
 	indexA = swappableList[selected];
-	
+
 	swappableList.erase(swappableList.begin() + selected);
 
 	selected = rand()%swappableList.size();
@@ -235,4 +241,12 @@ void Sudoku::swapRandCells(int colIndex){
 	current[indexA]->value = current[indexB]->value;
 	current[indexB]->value = aux;
 
+}
+
+void Sudoku::printPuzzle(){
+	for(int i = 0;i < cellCount;i++){
+		if(i%size==0)cout<<endl;
+		cout<<puzzle[i].value;
+	}
+	cout<<endl<<endl;
 }
