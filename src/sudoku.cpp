@@ -209,7 +209,7 @@ void Sudoku::swapRandCells(int colIndex){
 	vector<int> swappableList;
 	Cell** current = getColumn(colIndex);
 	for(int i = 0; i < size; i++){//pega elementos das colunas
-		if(current[i]->is_tip){
+		if(!current[i]->is_tip){
 			swappableList.push_back(i);
 		}
 	}
@@ -218,11 +218,11 @@ void Sudoku::swapRandCells(int colIndex){
 	int indexB;
 
 	int selected;
-
+	
 	selected = rand()%swappableList.size();
 
 	indexA = swappableList[selected];
-
+	
 	swappableList.erase(swappableList.begin() + selected);
 
 	selected = rand()%swappableList.size();

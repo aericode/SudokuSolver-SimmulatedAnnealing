@@ -37,12 +37,18 @@ int main(){
 	}
 	cout<<endl;
 	test.initCol(0);
-	col = test.getColumn(0);
 	for(int i=0;i<4;i++){
 		cout<<col[i]->value;
 		if(col[i]->is_tip)cout<<" - é dica";
 
 		cout<<endl;
 	}
-	
+	cout<<endl;
+	test.swapRandCells(0);
+	for(int i=0;i<4;i++){
+		cout<<col[i]->value;
+		if(col[i]->is_tip)cout<<" - é dica";
+
+		cout<<endl;
+	}
 }
