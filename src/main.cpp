@@ -1,5 +1,6 @@
 #include "cell.h"
 #include "sudoku.h"
+#include "simmulation.h"
 #include <string>
 #include <iostream>
 
@@ -11,7 +12,18 @@ using namespace std;
 int main(){
 	srand(time(NULL));
 
-	Sudoku orig("0111122203330444");
+	//Sudoku orig("0101132003030004");
+	Simmulation test("0101132003030004");
+
+	test.best->printPuzzle();
+
+	vector<int> swappable = test.swappableCols;
+
+	for(int i=0;i<swappable.size();i++){
+		cout<<swappable[i]<<endl;
+	}
+
+	/*
 	Sudoku test(orig);
 	//cout<<test.calcScore()<<endl;
 	Cell** col;
@@ -26,9 +38,7 @@ int main(){
 
 		cout<<endl;
 	}
-	*/
-	
-	/*
+
 	col = test.getColumn(0);
 	for(int i=0;i<4;i++){
 		cout<<col[i]->value;
@@ -52,9 +62,10 @@ int main(){
 
 		cout<<endl;
 	}
+
+	test.printPuzzle();
+	test.initSudoku();
+	test.printPuzzle();
 	*/
-	test.printPuzzle();
-	test.initCol(0);
-	test.printPuzzle();
 
 }
