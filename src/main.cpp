@@ -13,7 +13,7 @@ int main(){
 	srand(time(NULL));
 
 	//Sudoku orig("0101132003030004");
-	Simmulation test("0101132003030004");
+	Simmulation test("0101132003030004",1000);
 
 	test.best->printPuzzle();
 

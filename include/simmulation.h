@@ -25,7 +25,9 @@ public:
 	vector<int> swappableCols;
 
 	Simmulation();
-	Simmulation(string);
+	Simmulation(string,float);
+
+	bool testFlip();
 
 };
 
