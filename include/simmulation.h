@@ -9,6 +9,8 @@
 
 class Simmulation{
 public:
+	int perfectScore;
+
 	Sudoku* best;
 	int bestScore;
 
@@ -19,15 +21,22 @@ public:
 	int nextScore;
 
 	float temperature;
+	float cooldownRate;
 
 	int iterations;
 
 	vector<int> swappableCols;
 
 	Simmulation();
-	Simmulation(string,float);
+	Simmulation(string,float,float);
 
 	bool testFlip();
+
+	void refrigerate();
+
+	void simStep();
+
+	void seekAnswer(int);
 
 };
 

@@ -11,8 +11,12 @@ using namespace std;
 
 int main(){
 	srand(time(NULL));
+	Simmulation test("1020020000040300",1000,0.9);
 
-	//Sudoku orig("0101132003030004");
+	test.seekAnswer(-1);
+
+	/*
+	Sudoku orig("0101132003030004");
 	Simmulation test("0101132003030004",1000);
 
 	test.best->printPuzzle();
@@ -23,7 +27,7 @@ int main(){
 		cout<<swappable[i]<<endl;
 	}
 
-	/*
+	
 	Sudoku test(orig);
 	//cout<<test.calcScore()<<endl;
 	Cell** col;
@@ -31,7 +35,7 @@ int main(){
 	cout<<test.size<<endl;
 	cout<<test.level<<endl;
 
-	/*
+	
 	for(int i=0;i<16;i++){
 		cout<<test.puzzle[i].value;
 		if(test.puzzle[i].is_tip)cout<<" - é dica";

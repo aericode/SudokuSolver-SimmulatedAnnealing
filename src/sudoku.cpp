@@ -25,7 +25,7 @@ Sudoku::Sudoku(string tip_){
 	//melhor nota para linha = size
 	//nº linhas = size
 	//mesma coisa para blocos
-	int perfectScore = 2*size*size;
+	perfectScore = 2*size*size;
 
 	int currentValue;
 	for (int i = 0; i<cellCount; i++) { 
